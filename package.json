@@ -1,0 +1,17 @@
+{
+  "name": "garminupload",
+  "version": "1.0.0",
+  "description": "YAGCC kan uploaden via CLI, kan je gewoon je gegevens in vullen en gewicht en hij upload t. nu nog in home assistant krijgen",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.6.3",
+    "dotenv": "^16.3.1",
+    "nodemon": "^3.0.2"
+  }
+}
