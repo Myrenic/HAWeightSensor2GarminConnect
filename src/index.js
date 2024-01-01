@@ -15,6 +15,10 @@ const fetchSensorData = async () => {
         },
       }
     );
+    console.log(process.env.GARMIN_EMAIL);
+    console.log(process.env.YAGCC_API_URL);
+    console.log(process.env.HOME_ASSISTANT_SENSOR);
+    console.log(process.env.weight);
 
     const weight = parseFloat(response.data.state);
 
