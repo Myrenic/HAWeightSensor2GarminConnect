@@ -1,14 +1,14 @@
-const { exec } = require("child_process");
-require("dotenv").config();
 const axios = require("axios");
+require("dotenv").config();
 
 const homeAssistantApiUrl = process.env.HOME_ASSISTANT_API_URL;
-const garminBinaryPath = "./src/helpers/YAGCC"; // Adjust the path as needed
+const yagccApiUrl = process.env.YAGCC_API_URL;
+const weightSensorEntity = process.env.HOME_ASSISTANT_SENSOR;
 
 const fetchSensorData = async () => {
   try {
     const response = await axios.get(
-      `${homeAssistantApiUrl}/api/states/sensor.your_sensor`,
+      `${homeAssistantApiUrl}/api/states/${weightSensorEntity}`,
       {
         headers: {
           Authorization: `Bearer ${process.env.HOME_ASSISTANT_ACCESS_TOKEN}`,
@@ -16,21 +16,26 @@ const fetchSensorData = async () => {
       }
     );
 
-    const sensorData = response.data.state;
-    console.log("Sensor Data:", sensorData);
+    const weight = parseFloat(response.data.state);
 
-    // Construct the command to execute YAGCC with the desired data
-    // const command = `${garminBinaryPath} uploadbodycomposition --weight 81 --bone-mass 14 --fat 13 --hydration 58 --muscle-mass 42 --email ${process.env.GARMIN_EMAIL} -p ${process.env.GARMIN_PASSWORD}`;
-    const command = `${garminBinaryPath} uploadbodycomposition --weight 81 --email ${process.env.GARMIN_EMAIL} -p ${process.env.GARMIN_PASSWORD}`;
+    // Construct the payload for the YAGCC API
+    const yagccPayload = {
+      timeStamp: -1,
+      weight: weight,
+      email: process.env.GARMIN_EMAIL,
+      password: process.env.GARMIN_PASSWORD,
+    };
 
-    // Execute the command
-    exec(command, (error, stdout, stderr) => {
-      if (error) {
-        console.error(`Error executing YAGCC: ${error.message}`);
-        return;
-      }
-      console.log("YAGCC Output:", stdout);
-    });
+    // Send a POST request to the YAGCC API
+    const yagccResponse = await axios.post(yagccApiUrl, yagccPayload);
+    if (yagccResponse.status == 201) {
+      console.log(
+        `Successfully sent weight of ${weight} to the following garmin account: ${process.env.GARMIN_EMAIL}`
+      );
+    } else {
+      console.log("YAGCC Response Status:", yagccResponse.status); // Log the HTTP status code
+      console.log("YAGCC Response Data:", yagccResponse.data);
+    }
   } catch (error) {
     console.error("Error:", error.message);
   }
