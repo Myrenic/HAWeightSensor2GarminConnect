@@ -18,7 +18,7 @@ version: "3.9"
 services:
   node-app:
     container_name: HAWeightSensor2GarminConnect
-    image: myrenic/HAWeightSensor2GarminConnect:latest
+    image: ghcr.io/myrenic/haweightsensor2garminconnect:main
     environment:
       - HOME_ASSISTANT_API_URL=https://home.example.com
       - HOME_ASSISTANT_ACCESS_TOKEN=your_home_assistant_access_token
