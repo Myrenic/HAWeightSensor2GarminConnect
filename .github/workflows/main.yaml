@@ -27,5 +27,5 @@ jobs:
           push: true
           tags: ghcr.io/myrenic/hasensor2garminconnect:latest
         env:
-          DOCKER_USERNAME: ${{ secrets.GH_USERNAME }}
+          DOCKER_USERNAME: ${{ github.actor }}
           DOCKER_PASSWORD: ${{ secrets.GH_TOKEN }}
