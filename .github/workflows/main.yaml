@@ -1,5 +1,7 @@
 name: Node.js Docker Build
-
+permissions:
+  contents: read
+  packages: write
 on:
   push:
     branches:
@@ -21,9 +23,6 @@ jobs:
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
-        permissions:
-          contents: read
-          packages: write
         with:
           context: .
           file: ./Dockerfile
