@@ -27,5 +27,5 @@ jobs:
           push: true
           tags: myrenic/haweightsensor2garminconnect:latest
         env:
-          DOCKER_USERNAME: ${{ github.actor }}
+          DOCKER_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_HUB_TOKEN }}
