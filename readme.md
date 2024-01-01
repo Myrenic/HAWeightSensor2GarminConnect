@@ -2,12 +2,14 @@
 
 
 ## Compose example: 
+
+```
 version: "3.9"
 
 services:
   node-app:
     container_name: node-docker
-    image: myrenic/hasensor2garminconnect:latest
+    image: myrenic/HAWeightSensor2GarminConnect:latest
     environment:
       - HOME_ASSISTANT_API_URL=https://home.example.com
       - HOME_ASSISTANT_ACCESS_TOKEN=your_home_assistant_access_token
@@ -22,4 +24,6 @@ services:
     container_name: YAGCC
     restart: unless-stopped
     image: lswiderski/yet-another-garmin-connect-client-api
+
+```
 
