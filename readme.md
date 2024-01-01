@@ -1,39 +1,25 @@
-YAGCC kan uploaden via CLI, kan je gewoon je gegevens in vullen en gewicht en hij upload t.
-nu nog in home assistant krijgen
+# Send Home Assistant variable to Garmin using YAGCC.
 
 
-YAGCC runt nu in docker compose op 10.0.0.3; 
-
+## Compose example: 
 version: "3.9"
+
 services:
-  YAGCC:
+  node-app:
+    container_name: node-docker
+    image: myrenic/hasensor2garminconnect:latest
+    environment:
+      - HOME_ASSISTANT_API_URL=https://home.example.com
+      - HOME_ASSISTANT_ACCESS_TOKEN=your_home_assistant_access_token
+      - YAGCC_API_URL=http://YAGCC:/upload
+      - HOME_ASSISTANT_SENSOR=sensor.weight
+      - GARMIN_EMAIL=your_garmin_email
+      - GARMIN_PASSWORD=your_garmin_password
+    depends_on:
+      - yagcc-api
+
+  yagcc-api:
     container_name: YAGCC
     restart: unless-stopped
     image: lswiderski/yet-another-garmin-connect-client-api
-    ports:
-      - 555:80 
-
-
-https://github.com/lswiderski/WebBodyComposition/blob/802e84d89ac7fd70f43e290fdf4b1f9171587e03/pages/sync/garmin.js#L4
-
- const payload =
-        {
-            timeStamp: -1,
-            weight: parseFloat(weight),
-            <!-- percentFat: parseFloat(fat ?? 0),
-            percentHydration: parseFloat(waterPercentage ?? 0),
-            boneMass: parseFloat(boneMass ?? 0),
-            muscleMass: parseFloat(muscleMass ?? 0),
-            visceralFatRating: parseFloat(visceralFat ?? 0),
-            physiqueRating: parseFloat(bodyType ?? 0),
-            metabolicAge: parseFloat(metabolicAge ?? 0),
-            bodyMassIndex: parseFloat(bmi ?? 0), -->
-            email,
-            password,
-        }
-
- headers: {
-                    'accept': 'application/json',
-                    'Content-Type': 'application/json',
-                }
 
