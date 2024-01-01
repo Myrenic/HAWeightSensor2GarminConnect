@@ -25,7 +25,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ghcr.io/${{ github.repository }}/hasensor2garminconnect:latest
+          tags: ghcr.io/myrenic/hasensor2garminconnect:latest
         env:
           DOCKER_USERNAME: ${{ secrets.GH_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.GH_TOKEN }}
