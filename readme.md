@@ -17,7 +17,7 @@ version: "3.9"
 
 services:
   node-app:
-    container_name: node-docker
+    container_name: HAWeightSensor2GarminConnect
     image: myrenic/HAWeightSensor2GarminConnect:latest
     environment:
       - HOME_ASSISTANT_API_URL=https://home.example.com
