@@ -25,7 +25,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: your-docker-hub-username/haweightsensor2garminconnect:latest
+          tags: myrenic/haweightsensor2garminconnect:latest
         env:
           DOCKER_USERNAME: ${{ github.actor }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_HUB_TOKEN }}
