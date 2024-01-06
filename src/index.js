@@ -11,7 +11,7 @@ const homeAssistantApiUrl = process.env.HOME_ASSISTANT_API_URL;
 const yagccApiUrl = process.env.YAGCC_API_URL;
 const weightSensorEntity = process.env.HOME_ASSISTANT_WEIGHT_SENSOR;
 const impedanceSensorEntity = process.env.HOME_ASSISTANT_IMPEDANCE_SENSOR;
-const pollingInterval = process.env.POLLING_INTERVAL || 10000; // Default: 5 minutes
+const pollingInterval = process.env.POLLING_INTERVAL || 300000;
 let lastUpdatedTimestamp = null;
 
 // Function to calculate body composition metrics using the Metrics class
@@ -112,7 +112,16 @@ const fetchSensorData = async () => {
 const runScript = async () => {
   while (true) {
     await fetchSensorData();
-    console.log("# | Sleeping for 5 mins");
+    if (pollingInterval % 1000 == 0) {
+      if (pollingInterval % 60 == 0) {
+        pollingIntervalFormated = pollingInterval / 1000 / 60 + " mins";
+      } else {
+        pollingIntervalFormated = pollingInterval / 1000 + " seconds";
+      }
+    } else {
+      pollingIntervalFormated = pollingInterval + " ms";
+    }
+    console.log(`# | Sleeping for ${pollingIntervalFormated}`);
     await new Promise((resolve) => setTimeout(resolve, pollingInterval));
   }
 };
