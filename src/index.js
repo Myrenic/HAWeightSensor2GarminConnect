@@ -106,7 +106,6 @@ const fetchSensorData = async () => {
       console.log(
         `# | Successfully sent weight of ${weight} to the following Garmin account: ${process.env.GARMIN_EMAIL}`
       );
-      console.log(yagccPayload);
     } else {
       console.log("# | YAGCC Response Status:", yagccResponse.status); // Log the HTTP status code
       console.log("# | YAGCC Response Data:", yagccResponse.data);
