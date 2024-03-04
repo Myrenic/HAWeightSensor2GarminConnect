@@ -20,12 +20,17 @@ services:
     container_name: HAWeightSensor2GarminConnect
     image: ghcr.io/myrenic/haweightsensor2garminconnect:main
     environment:
-      - HOME_ASSISTANT_API_URL=https://home.example.com
-      - HOME_ASSISTANT_ACCESS_TOKEN=your_home_assistant_access_token
-      - YAGCC_API_URL=http://10.0.0.3:555/upload
-      - HOME_ASSISTANT_SENSOR=sensor.weight
-      - GARMIN_EMAIL=your_garmin_email
-      - GARMIN_PASSWORD=your_garmin_password
+      - HOME_ASSISTANT_API_URL=
+      - HOME_ASSISTANT_ACCESS_TOKEN=
+      - HOME_ASSISTANT_WEIGHT_SENSOR=
+      - HOME_ASSISTANT_IMPEDANCE_SENSOR=
+      - YAGCC_API_URL=http://local-ip:555/upload
+      - GARMIN_EMAIL=
+      - GARMIN_PASSWORD=
+      - USER_HEIGHT=190 # height in CM
+      - USER_SEX=male #or use female
+      - USER_AGE=24 
+      - POLLING_INTERVAL=1800000 # interval in ms
     depends_on:
       - yagcc-api
 
