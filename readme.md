@@ -31,6 +31,7 @@ services:
       - USER_SEX=male #or use female
       - USER_AGE=24 
       - POLLING_INTERVAL=1800000 # interval in ms
+      - DEBUG_MODE=true
     depends_on:
       - yagcc-api
 
