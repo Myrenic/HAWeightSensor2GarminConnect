@@ -1,3 +1,29 @@
+# Archived
+Note: This repository is no longer actively maintained. I have transitioned to using native automations to post body metrics to YAGCC. Below is an example configuration:
+
+```yaml
+rest_command:
+  send_bodymetrics_to_yagcc:
+    url: "http://[ip:port]/upload"
+    method: POST
+    headers:
+      Content-Type: "application/json"
+    payload: >
+      {
+        "timeStamp": -1,
+        "weight": {{ states('sensor.body_weight') }},
+        "email": !secret garmin_email,
+        "password": !secret garmin_password,
+        "percentFat": {{ states('sensor.body_body_fat') }},
+        "percentHydration": {{ states('sensor.body_water') }},
+        "boneMass": {{ states('sensor.body_bone_mass') }},
+        "muscleMass": {{ states('sensor.body_muscle_mass') }},
+        "visceralFatRating": {{ states('sensor.body_visceral_fat') }},
+        "metabolicAge": {{ states('sensor.body_metabolic_age') }},
+        "bodyMassIndex": {{ states('sensor.body_bmi') }}
+      }
+```    
+
 # HAWeightSensor2GarminConnect
 
 Docker Compose Configuration for Syncing Weight Data from Home Assistant to Garmin Connect.
